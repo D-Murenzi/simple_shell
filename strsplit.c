@@ -31,5 +31,6 @@ char **strsplit(char *ptr)
 		strarray[i] = newptr;
 		newptr = strtok(NULL, delimit);
 	}
+	strarray[n] = NULL;
 	return (strarray);
 }

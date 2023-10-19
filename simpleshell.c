@@ -18,7 +18,6 @@
 int simple_shell(void)
 {
 	char *ptr;
-	FILE *pipe;
 	size_t n;
 	char **argv;
 	pid_t my_pid;
@@ -30,36 +29,17 @@ int simple_shell(void)
 	}
 	printf("$");
 	getline(&ptr, &n, stdin);
+	if (ptr[strlen(ptr) - 1] == '\n')
+	{
+		ptr[strlen(ptr) - 1] = '\0';
+	}
 	argv = strsplit(ptr);
-
-
 	my_pid = fork();
 
 	if (my_pid == 0)
 	{
-		char whichCmd[100];
-
-		snprintf(whichCmd, sizeof(whichCmd), "which %s", argv[0]);
-		pipe = popen(whichCmd, "r");
-
-		if (pipe != NULL)
-		{
-			char fullPath[100];
-
-			if (fgets(fullPath, sizeof(fullPath), pipe) != NULL)
-			{
-				fullPath[strcspn(fullPath, "\n")] = '\0';
-				execve(fullPath, argv, NULL);
-				perror("execve");
-				exit(1);
-			}
-		}
-		else
-		{
-			printf("%s: command not found\n", argv[0]);
-			exit(0);
-		}
-		pclose(pipe);
+		execvp(argv[0], argv);
+		return (1);
 	}
 	if (my_pid != 0)
 	{
@@ -67,7 +47,7 @@ int simple_shell(void)
 		if (strcmp(argv[0], "exit") == 0)
 		{
 			free(ptr);
-			exit(0);
+			execvp("exit", argv);
 		}
 		else
 		{
