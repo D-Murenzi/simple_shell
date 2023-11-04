@@ -1,5 +1,6 @@
 /* this is a build in cd function*/
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -11,12 +12,25 @@
 
 int cd(char *filepath)
 {
-	int a;
+	int a, b;
 
-	a = chdir(filepath);
-	if (a != 0)
+	if (filepath == NULL)
 	{
-		printf("cd: %s: No such file or directory\n", filepath);
+		printf("cd:usage:./cd argument");
 	}
-	return (a);
+	a = chdir(filepath) != 0;
+	if (a == 0)
+	{
+		b = setenv("PWD", filepath, 1);
+		if (b != 0)
+		{
+			perror("setenv");
+		}
+	}
+	else
+	{
+			perror("cd");
+	}
+
+	return (0);
 }
