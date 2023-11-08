@@ -6,12 +6,12 @@
 #include <stdlib.h>
 
 /**
- * t.h>getline-reads a string from stdin
+ * _getline-reads a string from stdin
  * @ptr: the buffer to store the string
  * Return: number of characters it reads
  */
 
-int getline(char *ptr)
+int _getline(char *ptr)
 {
 	int a;
 	char *buff;

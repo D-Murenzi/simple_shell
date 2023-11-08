@@ -10,18 +10,17 @@
  * Return: 0 on success and 1 on failure
  */
 
-void env(char *env[])
+void env_function(char *env[])
 {
 	int a;
 
 	if (env == NULL)
 	{
 		printf("error loading env variables\n");
-		return (1);
+		return;
 	}
 	for (a = 0; env[a] != NULL; a++)
 	{
 		printf("%s\n", env[a]);
 	}
-	return (0);
 }

@@ -10,9 +10,12 @@
 #include <stdarg.h>
 #include <errno.h>
 
+char *_strcat(char *dest, char *src);
 int cd(char *filepath);
 int simple_shell(void);
-int word_count(char *ptr);
-char **strsplit(char *ptr);
+int word_count(char *ptr, char *delimit);
+char **strsplit(char *ptr, char *delimit);
+char *present(char *pointer);
+void env_function(char *env[]);
 
 #endif

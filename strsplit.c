@@ -7,19 +7,18 @@
 /**
  * strsplit-splits the string into each words
  * @ptr:pointer to string
+ * @delimit: the separator for strings to count as words
  * Return: array to the array of words
  */
 
-char **strsplit(char *ptr)
+char **strsplit(char *ptr, char *delimit)
 {
 	char *newptr;
-	char *delimit;
 	char **strarray;
 	int n;
 	int i;
 
-	n = word_count(ptr);
-	delimit = " ";
+	n = word_count(ptr, delimit);
 	strarray = malloc(sizeof(char *) * n);
 	if (strarray == NULL)
 	{

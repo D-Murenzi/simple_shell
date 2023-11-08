@@ -6,23 +6,23 @@
 /**
  * word_count-counts words in the string
  * @ptr: pointer to the string
+ * @delimit: the separator of strings to count as words
  * Return: number of words in the string
  */
 
-int word_count(char *ptr)
+int word_count(char *ptr, char *delimit)
 {
 	int n;
-	char delimit = ' ';
 	const char *newptr;
 
-	if (ptr == NULL)
+	if ((ptr == NULL) || (delimit == NULL))
 	{
 		return (0);
 	}
 	n = 0;
 	for (newptr = ptr; *newptr != '\0'; newptr++)
 	{
-		if (*newptr == delimit)
+		if (*newptr == *delimit)
 		{
 			n++;
 		}

@@ -16,7 +16,11 @@ int cd(char *filepath)
 
 	if (filepath == NULL)
 	{
-		printf("cd:usage:./cd argument");
+		filepath = getenv("HOME");
+	}
+	if (*filepath == '-')
+	{
+		filepath = getenv("OLDPWD");
 	}
 	a = chdir(filepath) != 0;
 	if (a == 0)
