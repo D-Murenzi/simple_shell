@@ -9,25 +9,25 @@
  * Return: 0 on success or any number on failure
  */
 
-int excuter(char *argv[], char *env[])
+int excuter(char **argv, char **env)
 {
 	int a;
 	char *ptr_path;
 	pid_t my_pid;
 	
-	if (strcmp(argv[1], "cd") == 0)
+	if (strcmp(argv[0], "cd") == 0)
 	{
 		cd(argv[1]);
 		return (0);
 	}
-	else if (strcmp(argv[1], "env") == 0)
+	if (strcmp(argv[0], "env") == 0)
 	{
 		env_function(env);
 		return (0);
 	}
 	else
 	{
-		ptr_path = present(argv[1]);
+		ptr_path = present(argv[0]);
 		if (ptr_path != NULL)
 		{
 			my_pid = fork();
@@ -36,7 +36,7 @@ int excuter(char *argv[], char *env[])
 				a = execve(ptr_path, argv, env);
 				if (a)
 				{
-					perror(argv[1]);
+					perror(argv[0]);
 					return (1);
 				}
 			}

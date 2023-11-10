@@ -21,6 +21,6 @@ void env_function(char *env[])
 	}
 	for (a = 0; env[a] != NULL; a++)
 	{
-		printf("%s\n", env[a]);
+		dprintf(STDOUT_FILENO,"%s\n", env[a]);
 	}
 }

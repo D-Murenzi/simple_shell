@@ -17,7 +17,6 @@ char *present(char *pointer)
 		int n, a, b, c, d;
 
 		ptr_path = getenv("PATH");
-		printf("the retrieved path variable is:%s\n", ptr_path);
 		n = word_count(ptr_path, ":");
 		path_array = strsplit(ptr_path, ":");
 		for (a = 0; a < n; a++)

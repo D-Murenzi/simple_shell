@@ -1,6 +1,7 @@
 #ifndef MAIN_C
 #define MAIN_C
 
+#include <limits.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdio.h>
@@ -17,5 +18,7 @@ int word_count(char *ptr, char *delimit);
 char **strsplit(char *ptr, char *delimit);
 char *present(char *pointer);
 void env_function(char *env[]);
+int excuter(char *argv[], char *env[]);
+int _getline(char *ptr);
 
 #endif

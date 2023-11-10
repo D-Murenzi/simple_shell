@@ -22,7 +22,7 @@ int cd(char *filepath)
 	{
 		filepath = getenv("OLDPWD");
 	}
-	a = chdir(filepath) != 0;
+	a = chdir(filepath);
 	if (a == 0)
 	{
 		b = setenv("PWD", filepath, 1);
