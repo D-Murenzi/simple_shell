@@ -28,5 +28,6 @@ int _getline(char *ptr)
 		a++;
 		buff++;
 	}
+	*buff = '\0';
 	return (a);
 }

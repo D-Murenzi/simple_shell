@@ -19,7 +19,7 @@ char **strsplit(char *ptr, char *delimit)
 	int i;
 
 	n = word_count(ptr, delimit);
-	strarray = malloc(sizeof(char *) * n);
+	strarray = malloc(sizeof(char *) * (n + 1));
 	if (strarray == NULL)
 	{
 		return (NULL);

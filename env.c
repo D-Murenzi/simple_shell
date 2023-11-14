@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "main.c"
 
 /**
  * env-prints the environmental variables to the stdout
@@ -16,7 +17,7 @@ void env_function(char *env[])
 
 	if (env == NULL)
 	{
-		printf("error loading env variables\n");
+		perror("error loading env variables\n");
 		return;
 	}
 	for (a = 0; env[a] != NULL; a++)
