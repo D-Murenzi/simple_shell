@@ -84,7 +84,6 @@ int cd(char *filepath)
 		{
 			perror("getcwd");
 		}
-	dprintf(STDOUT_FILENO, "filepath = %s\n", filepath);
 	}
 	else
 	{

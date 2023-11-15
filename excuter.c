@@ -10,7 +10,7 @@
  * Return: 0 on success or any number on failure
  */
 
-int excuter(char **argv, char **env)
+int excuter(char *name, char **argv, char **env)
 {
 	int a;
 	char *ptr_path;
@@ -43,6 +43,10 @@ int excuter(char **argv, char **env)
 		{
 			wait(NULL);
 		}
+	}
+	else
+	{
+		perror(name);
 	}
 	return (0);
 }

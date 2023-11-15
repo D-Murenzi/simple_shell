@@ -20,7 +20,7 @@ int word_count(char *ptr, char *delimit);
 char **strsplit(char *ptr, char *delimit);
 char *present(char *pointer);
 void env_function(char *env[]);
-int excuter(char *argv[], char *env[]);
+int excuter(char *name, char *argv[], char *env[]);
 int _getline(char *ptr);
 
 int exit_Status(char **args);
