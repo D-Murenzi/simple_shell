@@ -6,7 +6,7 @@
 #include "main.c"
 
 /**
- * env-prints the environmental variables to the stdout
+ * env_function-prints the environmental variables to the stdout
  * @env: the environmental variables from the process
  * Return: 0 on success and 1 on failure
  */
@@ -22,6 +22,6 @@ void env_function(char *env[])
 	}
 	for (a = 0; env[a] != NULL; a++)
 	{
-		dprintf(STDOUT_FILENO,"%s\n", env[a]);
+		dprintf(STDOUT_FILENO, "%s\n", env[a]);
 	}
 }
