@@ -6,6 +6,7 @@
 /**
  * excuter-determines built ins and excutes the non built in commands
  * @argv:array containing command and its arguments
+ * @name: name of the running program
  * @env: array containing environmental variables
  * Return: 0 on success or any number on failure
  */
