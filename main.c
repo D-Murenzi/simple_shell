@@ -1,6 +1,7 @@
 #ifndef MAIN_C
 #define MAIN_C
 
+
 #include <limits.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -10,6 +11,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include <errno.h>
+
 
 char *_strcat(char *dest, char *src);
 int cd(char *filepath);
@@ -21,4 +23,13 @@ void env_function(char *env[]);
 int excuter(char *argv[], char *env[]);
 int _getline(char *ptr);
 
+int exit_Status(char **args);
+
+int help(char **args);
+
 #endif
+
+
+
+
+
