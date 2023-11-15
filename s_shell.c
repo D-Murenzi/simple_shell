@@ -14,21 +14,39 @@ int main(int argc, char **argv, char **env)
 {
 	if ((argc > 0) && (argv != NULL))
 	{
-		char *ptr, *ptr1, **arguments;
-		
-		ptr = malloc(sizeof(char) * INT_MAX);
-		if (ptr == NULL)
-		{
-			return (1);
-		}
 		while (1)
 		{
+			char *ptr, *ptr1, **arguments;
+			int b;
+			size_t n;
+
+			ptr = malloc(sizeof(char) * 4);
+			if (ptr == NULL)
+			{
+				return (1);
+			}
 			ptr1 = getenv("PWD");
 			dprintf(STDOUT_FILENO,"%s ($)", ptr1);
-			_getline(ptr);
+			getline(&ptr, &n, stdin);
+			if (ptr[strlen(ptr) - 1] == '\n')
+			{
+				ptr[strlen(ptr) - 1] = '\0';
+			}
 			arguments = strsplit(ptr," ");
+			for (b = 0; arguments[b] != NULL; b++)
+			{
+				dprintf(STDOUT_FILENO,"%s\n", arguments[b]);
+			}
+			if (strcmp(arguments[0],"exit") == 0)
+			{
+				break;
+			}
 			excuter(arguments, env);
+			free(ptr);
+			free(arguments);
 		}
+
 	}
+
 	return (0);
 }

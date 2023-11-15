@@ -3,6 +3,47 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "main.c"
+
+/**
+ * path_exp-expands the arguments to cd
+ * @filepath: pointer to the path to change the directory to
+ * Return: pointer to the expanded path
+ */
+
+char *path_exp(char *filepath)
+{
+	char *home, *oldwd, *exppath;
+
+	home = getenv("HOME");
+	oldwd = getenv("OLDPWD");
+
+	if (filepath[0] == '~')
+	{
+		exppath = malloc(strlen(home) + strlen(filepath) + 1);
+		if (exppath == NULL)
+		{
+			perror("mamory allocation in cd");
+			return (NULL);
+		}
+		strcpy(exppath, home);
+		strcat(exppath, filepath + 1);
+		return (exppath);
+	}
+	if (filepath[0] == '-')
+	{
+		exppath = malloc(strlen(oldwd) + strlen(filepath) + 1);
+		if (exppath == NULL)
+		{
+			perror("mamory allocation in cd");
+			return (NULL);
+		}
+		strcpy(exppath, oldwd);
+		strcat(exppath, filepath + 1);
+		return (exppath);
+	}
+	return (filepath);
+}
 
 /**
  * cd-changes the workking directory
@@ -12,29 +53,43 @@
 
 int cd(char *filepath)
 {
-	int a, b;
+	char *pwd, *home;
 
+	home = getenv("HOME");
 	if (filepath == NULL)
 	{
-		filepath = getenv("HOME");
+		filepath = home;
 	}
-	if (*filepath == '-')
+	if ((filepath[0] == '~') || (filepath[0] == '-'))
 	{
-		filepath = getenv("OLDPWD");
-	}
-	a = chdir(filepath);
-	if (a == 0)
-	{
-		b = setenv("PWD", filepath, 1);
-		if (b != 0)
+		filepath = path_exp(filepath);
+		if (filepath == NULL)
 		{
-			perror("setenv");
+			return (-1);
+		}
+	}
+	dprintf(STDOUT_FILENO, "filepath = %s\n", filepath);
+	if (chdir(filepath) == 0)
+	{
+		pwd = getcwd(NULL, 0);
+		if (pwd != NULL)
+		{
+			if (setenv("PWD", pwd, 1) != 0)
+			{
+				perror("setenv");
+			}
+			free(pwd);
+		}
+		else
+		{
+			perror("getcwd");
 		}
 	}
 	else
 	{
-			perror("cd");
+		perror("cd");
+		return (-1);
 	}
-
+	free(filepath);
 	return (0);
 }

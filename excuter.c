@@ -28,12 +28,13 @@ int excuter(char **argv, char **env)
 	else
 	{
 		ptr_path = present(argv[0]);
+		dprintf(STDOUT_FILENO, "%s\n ", ptr_path);
 		if (ptr_path != NULL)
 		{
 			my_pid = fork();
 			if (my_pid == 0)
 			{
-				a = execve(ptr_path, argv, env);
+				a = execvp(argv[0], argv);
 				if (a)
 				{
 					perror(argv[0]);
