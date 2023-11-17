@@ -39,6 +39,7 @@ int main(int argc, char **argv, char **env)
 			arguments = strsplit(ptr, " ");
 			if (strcmp(arguments[0], "exit") == 0)
 			{
+				free(arguments);
 				free(ptr);
 				break;
 			}

@@ -43,6 +43,7 @@ int excuter(char *name, char **argv, char **env)
 			}
 		if (my_pid != 0)
 		{
+			free(ptr_path);
 			wait(NULL);
 		}
 	}

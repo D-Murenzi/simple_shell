@@ -20,27 +20,29 @@ char *sub_present(char *pointer)
 	for (a = 0; a < n; a++)
 	{
 		ptr = malloc(strlen(path_array[a]) + 2 + strlen(pointer));
-	if (ptr == NULL)
-	{
-		free(path_array);
-		return (NULL);
+		if (ptr == NULL)
+		{
+			free(path_array);
+			return (NULL);
+		}
+		strcpy(ptr, path_array[a]);
+		if (ptr[strlen(path_array[a]) - 1] != '/')
+		{
+			strcat(ptr, "/");
+		}
+		strcat(ptr, pointer);
+		if (access(ptr, F_OK | X_OK) != 0)
+		{
+			free(ptr);
+		}
+		else
+		{
+			free(ptr_path);
+			free(path_array);
+			return (ptr);
+		}
 	}
-	strcpy(ptr, path_array[a]);
-	if (ptr[strlen(path_array[a]) - 1] != '/')
-	{
-		strcat(ptr, "/");
-	}
-	strcat(ptr, pointer);
-	if (access(ptr, F_OK | X_OK) != 0)
-	{
-		free(ptr);
-	}
-	else
-	{
-		free(path_array);
-		return (ptr);
-	}
-	}
+	free(ptr_path);
 	free(path_array);
 	return (NULL);
 }
