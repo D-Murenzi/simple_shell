@@ -23,7 +23,10 @@ int main(int argc, char **argv, char **env)
 
 			ptr = NULL;
 			ptr1 = getenv("PWD");
-			dprintf(1, "%s ($)", ptr1);
+			if (isatty(STDIN_FILENO) == 1)
+			{
+				dprintf(1, "%s ($)", ptr1);
+			}
 			n = getline(&ptr, &b, stdin);
 			if ((n <= 0) || (n == EOF))
 			{
