@@ -19,7 +19,7 @@ char *sub_present(char *pointer)
 	path_array = strsplit(ptr_path, ":");
 	for (a = 0; a < n; a++)
 	{
-		ptr = malloc(strlen(path_array[a]) + 1 + strlen(pointer));
+		ptr = malloc(strlen(path_array[a]) + 2 + strlen(pointer));
 	if (ptr == NULL)
 	{
 		free(path_array);
