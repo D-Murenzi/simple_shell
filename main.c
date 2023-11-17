@@ -13,6 +13,7 @@
 #include <errno.h>
 
 
+char *sub_present(char *pointer);
 char *_strcat(char *dest, char *src);
 int cd(char *filepath);
 int simple_shell(void);

@@ -18,24 +18,23 @@ int main(int argc, char **argv, char **env)
 		while (1)
 		{
 			char *ptr, *ptr1, **arguments;
-			size_t  n;
+			size_t b;
+			ssize_t n;
 
-			ptr = malloc(sizeof(char) * 9);
-			if (ptr == NULL)
-			{
-				return (1);
-			}
+			ptr = NULL;
 			ptr1 = getenv("PWD");
-			dprintf(STDOUT_FILENO, "%s ($)", ptr1);
-
-			getline(&ptr, &n, stdin);
-			if (ptr[strlen(ptr) - 1] == '\n')
+			dprintf(1, "%s ($)", ptr1);
+			n = getline(&ptr, &b, stdin);
+			if ((n <= 0) || (n == EOF))
 			{
-				ptr[strlen(ptr) - 1] = '\0';
+				break;
+			}
+			if (ptr[n - 1] == '\n')
+			{
+				ptr[n - 1] = '\0';
 			}
 			arguments = strsplit(ptr, " ");
-			dprintf(STDOUT_FILENO, "%s\n", arguments[0]);
-			if ((strcmp(arguments[0], "exit") == 0) || (*arguments[0] == EOF))
+			if (strcmp(arguments[0], "exit") == 0)
 			{
 				break;
 			}

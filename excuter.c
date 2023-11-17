@@ -28,6 +28,7 @@ int excuter(char *name, char **argv, char **env)
 		return (0);
 	}
 	ptr_path = present(argv[0]);
+
 	if (ptr_path != NULL)
 	{
 		my_pid = fork();

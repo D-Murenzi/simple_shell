@@ -14,23 +14,16 @@
 void _getline(char *ptr)
 {
 	char *buff;
-	int a;
 
-	dprintf(STDOUT_FILENO, "am in getline");
 	buff = ptr;
-	a = read(STDIN_FILENO, buff, 1);
-	if (a < 0)
-	{
-		perror("can't read fron stdin");
-	}
 	while (*buff != '\n')
 	{
-		buff++;
-		a = read(STDIN_FILENO, buff, 1);
-		if (a == 0)
+		*buff = read(STDIN_;
+		if (*buff == EOF)
 		{
 			break;
 		}
+		buff++;
 	}
 	if (*buff == '\n')
 	{
